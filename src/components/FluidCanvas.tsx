@@ -17,24 +17,31 @@ export const FluidCanvas: React.FC<FluidCanvasProps> = ({ className = '' }) => {
         IMMEDIATE: true,
         TRIGGER: 'hover',
         AUTO: true,
-        INTERVAL: 3500,
+        INTERVAL: 3000,
         SIM_RESOLUTION: 128,
         DYE_RESOLUTION: 512,
         CAPTURE_RESOLUTION: 512,
-        DENSITY_DISSIPATION: 2.8, // Clean, graceful dissipation for light background
+        DENSITY_DISSIPATION: 1.25, // Slower dissipation keeps colors deep, rich & visible
         VELOCITY_DISSIPATION: 0.98,
-        PRESSURE: 0.8,
-        PRESSURE_ITERATIONS: 20,
-        CURL: 30,
-        SPLAT_RADIUS: 0.28,
-        SPLAT_FORCE: 6000,
+        PRESSURE: 0.85,
+        PRESSURE_ITERATIONS: 22,
+        CURL: 32,
+        SPLAT_RADIUS: 0.38, // Wider, punchier splashes
+        SPLAT_FORCE: 7500,
         SHADING: true,
         COLORFUL: true,
-        COLOR_UPDATE_SPEED: 12,
+        COLOR_UPDATE_SPEED: 14,
         PAUSED: false,
         TRANSPARENT: true,
-        BLOOM: false, // Bloom off keeps pastel light colors ultra clean
-        SUNRAYS: false,
+        BLOOM: true, // Vivid luminous bloom for bold vibrancy
+        BLOOM_ITERATIONS: 8,
+        BLOOM_RESOLUTION: 256,
+        BLOOM_INTENSITY: 0.45,
+        BLOOM_THRESHOLD: 0.4,
+        BLOOM_SOFT_KNEE: 0.7,
+        SUNRAYS: true,
+        SUNRAYS_RESOLUTION: 196,
+        SUNRAYS_WEIGHT: 0.35,
       });
     } catch (err) {
       console.warn('WebGL Fluid initialization skipped or not supported:', err);
@@ -112,7 +119,7 @@ export const FluidCanvas: React.FC<FluidCanvasProps> = ({ className = '' }) => {
       <canvas
         ref={canvasRef}
         id="fluid"
-        className="w-full h-full block opacity-75 mix-blend-multiply"
+        className="w-full h-full block opacity-95 filter saturate-[1.75] contrast-[1.15]"
       />
     </div>
   );
